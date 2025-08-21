@@ -1,0 +1,8 @@
+---
+description: A set of ReactJS components specific rules
+globs:
+alwaysApply: true
+---
+
+## General
+- Use functional ReactJS component and not class based

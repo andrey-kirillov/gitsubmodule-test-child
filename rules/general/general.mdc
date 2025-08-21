@@ -1,0 +1,34 @@
+---
+description: A set of general rules
+globs:
+alwaysApply: true
+---
+
+## Description
+- All project are using ReactJS as the main library
+- The main UI libraries are: Material-UI v4 and MUI v5/v6
+
+## General
+- Do not use something your are not confident in
+
+- If using external functions/hooks/components not in codebase, provide documentation reference and justification
+
+- If you cannot prove your answer, say "I do not know" - no assumptions
+
+- Double-confirm answers with web documentation and provide references
+
+- All new code should be typescript: .ts, .tsx
+
+## Imports/Exports
+- Prefer default imports (especially MUI)
+```tsx
+import Box from '@material-ui/core/Box';
+```
+
+- Prefer bulk exports at end of file
+```tsx
+export {
+  fn1,
+  fn2,
+  fn3
+};

@@ -1,0 +1,68 @@
+---
+description: A set of specific react component unit test rules rules
+globs:
+alwaysApply: true
+---
+
+## The required import
+```js
+// Use these specific test utilities
+import { render } from '@a24group/react-testutils-render';
+// Import ALL @testing-library/react functions from @a24group/react-testutils-render
+```
+-  Component Mocking
+```js
+// Use mockQuick (global - don't import if it was not imported explicitly previously)
+const cardsListPath = 'react-core/common/components/layouts/cardsList/cardsList';
+jest.mock(cardsListPath, () => mockQuick(
+  'mockCardsList',
+  jest.requireActual(cardsListPath).default,
+  mockQuick.modes.wrapper,
+));
+```
+
+## API Mocking Pattern
+```js
+import {
+  getPendingApprovalCandidatesReferencesListForAgenciesContextAwaiter,
+} from '@a24group/react-api-references';
+
+// Api mocks
+const promissoryAwaiterPath = '@a24group/react-testutils-api';
+const referencesApiPath = '@a24group/react-api-references';
+jest.mock(referencesApiPath, () => {
+  const original = jest.requireActual(referencesApiPath);
+  const promissoryAwaiter = require(promissoryAwaiterPath);
+  const awaiters = {};
+  const methodsToMock = ['getPendingApprovalCandidatesReferencesListForAgenciesContext'];
+  methodsToMock.forEach((method) => {
+    const awaiter = promissoryAwaiter.promissoryAwaiter(original[method]);
+    awaiters[`${method}Awaiter`] = awaiter;
+    awaiters[method] = awaiter.promissoryCallback;
+  });
+  return {
+    ...original,
+    ...awaiters,
+  };
+});
+```
+
+## API Call Assertions
+```js
+// Assert API calls were made correctly
+expect(getPendingApprovalCandidatesReferencesListForAgenciesContextAwaiter.promissoryCallback)
+  .toHaveBeenCalledTimes(1);
+expect(getPendingApprovalCandidatesReferencesListForAgenciesContextAwaiter.promissoryCallback)
+  .toHaveBeenNthCalledWith(
+    1,
+    {
+      cacheVersion: '5b17df3276102308f2829c9d',
+      page: 1,
+      itemsPerPage: 25,
+      candidateId: undefined,
+      candidateTypeId: undefined,
+      sortBy: undefined,
+    },
+    expect.any(Object),
+  );
+```

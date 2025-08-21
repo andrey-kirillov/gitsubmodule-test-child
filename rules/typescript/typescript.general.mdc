@@ -1,0 +1,18 @@
+---
+description: A set of general typescript rules
+globs:
+alwaysApply: true
+---
+
+## General
+
+## Naming conventions
+- Use type instead of interface
+- Types names should be prefixed with T
+- Generics should have a T suffix
+```ts
+type TUser<ageT> = { 
+    name: string, // use a comma and not a semicolon
+    age: ageT
+  }
+```

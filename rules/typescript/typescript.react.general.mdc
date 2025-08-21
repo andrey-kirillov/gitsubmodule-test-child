@@ -1,0 +1,7 @@
+---
+description: A set of general ReactJS typescript rules
+globs:
+alwaysApply: true
+---
+
+## Don't use React.FC

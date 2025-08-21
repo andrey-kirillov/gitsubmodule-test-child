@@ -1,0 +1,41 @@
+---
+description: A set of general unit test rules
+globs:
+alwaysApply: true
+---
+
+### File Structure
+- **Filename**: `entityName.unit.test.js`
+- **FileType**: tests are `.js` files
+
+## Testing Don'ts
+```js
+// Don't mock these packages
+// @a24group/react-debug-logger
+// @a24group/react-debug-hooks/mountRlog
+// @a24group/react-hooks-datasourcing/promissory
+// @a24group/react-context-auth
+
+// Don't use these patterns
+// await waitFor(() => {...
+// getCandidateSocialLinksListForContextAwaiter.resolve
+// fireEvent (use userEvent instead)
+```
+
+## Testing Best Practices
+
+- **Real IDs**: Use real IDs in tests (e.g., `candidateId: '5b44668fe8a73a59851e5e9e'`)
+- **Full Object Assertions**: Assert complete objects, not individual properties
+- **Mock Data**: Use mock data from API folder JSON files
+- **User Events**: Use `userEvent` instead of `fireEvent`
+- **Reference Example**: Use `react-staffshift-candidate/src/app/components/references/agencies/approval/page/agenciesReferencesApprovalPage.unit.test.js`
+
+## Running Tests
+
+```bash
+# Run specific test
+npx jest testName
+
+# Run test file
+npx jest filename
+```

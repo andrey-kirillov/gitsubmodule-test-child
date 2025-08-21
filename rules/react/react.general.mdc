@@ -1,0 +1,15 @@
+---
+description: A set of general ReactJS rules
+globs:
+alwaysApply: true
+---
+
+## General
+- All components are memoized
+```tsx
+const CandidateSocialLinksCard = () => {}
+export default memo(CandidateSocialLinksCard);
+
+// Don't use displayName
+// Don't use memo with route components (RouteSystemAdminSitePage)
+```
